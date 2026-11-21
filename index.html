@@ -3,14 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>동국 트럭커 AI 1.0 | 운송장부</title>
+<title>동국 트럭커 AI 1.1 | 클라우드 운송장부</title>
 <style>
-:root{font-family:system-ui,-apple-system,'Malgun Gothic',sans-serif;color:#17243a;background:#f2f5f9}*{box-sizing:border-box}body{margin:0}.wrap{max-width:1000px;margin:auto;padding:22px 14px 50px}header{background:#142b4a;color:white;padding:24px;border-radius:16px;margin-bottom:18px}h1{margin:0;font-size:clamp(24px,5vw,34px)}header p{margin:8px 0 0;color:#d4e3f7}.panel{background:white;border-radius:14px;padding:20px;margin:16px 0;box-shadow:0 3px 16px #17243a0b}h2{font-size:20px;margin:0 0 15px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:5px}.field input{width:100%;border:1px solid #cbd5e1;border-radius:9px;padding:11px;font:inherit;min-width:0}.full{grid-column:1/-1}.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:15px}button{border:0;border-radius:9px;padding:11px 17px;font:inherit;font-weight:700;cursor:pointer;background:#1b66c9;color:white}button.secondary{background:#e8eef7;color:#17365d}button.danger{background:#a52631}button.small{padding:7px 10px;font-size:13px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{background:#eef4ff;padding:14px;border-radius:11px}.stat span{display:block;font-size:13px}.stat strong{display:block;font-size:clamp(17px,3vw,24px);margin-top:6px;overflow-wrap:anywhere}.stat.net{background:#e9f8ee}.tablewrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:770px;font-size:14px}th,td{text-align:left;border-bottom:1px solid #e5eaf1;padding:11px 8px;white-space:nowrap}th{background:#f6f8fb}td.num{text-align:right}th.num{text-align:right}.muted{color:#64748b;font-size:13px}.foot{margin-top:18px;line-height:1.65}.warning{background:#fff5dc;padding:12px;border-radius:10px;color:#72521b}.positive{color:#11723c}.negative{color:#b4232f}@media(max-width:560px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr}.wrap{padding:12px 10px 40px}.panel{padding:15px}}
+:root{font-family:system-ui,-apple-system,'Malgun Gothic',sans-serif;color:#17243a;background:#f2f5f9}*{box-sizing:border-box}body{margin:0}.wrap{max-width:1000px;margin:auto;padding:22px 14px 50px}header{background:#142b4a;color:white;padding:24px;border-radius:16px;margin-bottom:18px}h1{margin:0;font-size:clamp(24px,5vw,34px)}header p{margin:8px 0 0;color:#d4e3f7}.panel{background:white;border-radius:14px;padding:20px;margin:16px 0;box-shadow:0 3px 16px #17243a0b}h2{font-size:20px;margin:0 0 15px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:5px}.field input{width:100%;border:1px solid #cbd5e1;border-radius:9px;padding:11px;font:inherit;min-width:0}.full{grid-column:1/-1}.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:15px}button{border:0;border-radius:9px;padding:11px 17px;font:inherit;font-weight:700;cursor:pointer;background:#1b66c9;color:white}button.secondary{background:#e8eef7;color:#17365d}button.danger{background:#a52631}button.small{padding:7px 10px;font-size:13px}button:disabled{opacity:.5;cursor:not-allowed}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{background:#eef4ff;padding:14px;border-radius:11px}.stat span{display:block;font-size:13px}.stat strong{display:block;font-size:clamp(17px,3vw,24px);margin-top:6px;overflow-wrap:anywhere}.stat.net{background:#e9f8ee}.tablewrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:770px;font-size:14px}th,td{text-align:left;border-bottom:1px solid #e5eaf1;padding:11px 8px;white-space:nowrap}th{background:#f6f8fb}td.num,th.num{text-align:right}.muted{color:#64748b;font-size:13px}.foot{margin-top:18px;line-height:1.65}.warning{background:#fff5dc;padding:12px;border-radius:10px;color:#72521b}.positive{color:#11723c}.negative{color:#b4232f}.status{padding:11px 13px;border-radius:10px;background:#edf3fb;margin:10px 0}.hidden{display:none!important}@media(max-width:560px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr}.wrap{padding:12px 10px 40px}.panel{padding:15px}}
 </style>
 </head>
 <body>
 <div class="wrap">
-<header><h1>🚛 동국 트럭커 AI 1.0</h1><p>40대 트럭커의 운송장부 · 내 운행 기록을 한눈에</p></header>
+<header><h1>🚛 동국 트럭커 AI 1.1</h1><p>40대 트럭커의 운송장부 · PC와 휴대폰에서 함께</p></header>
+<section class="panel"><h2>구글 로그인 · 클라우드 연결</h2><div id="authStatus" class="status" role="status">Firebase 연결 준비 중…</div><div class="actions"><button type="button" id="loginBtn" disabled>구글 계정으로 로그인</button><button type="button" id="logoutBtn" class="secondary hidden">로그아웃</button></div><p class="muted">로그인한 계정의 기록만 표시합니다. Firebase 보안 규칙도 사용자별 접근을 허용하도록 설정해야 합니다.</p></section>
+<section class="panel hidden" id="migrationPanel"><h2>기존 장부 옮기기</h2><p id="migrationText"></p><div class="actions"><button type="button" id="importBtn">이 기기의 기존 기록을 클라우드로 복사</button><button type="button" id="localBackupBtn" class="secondary">기존 기록 CSV 백업</button></div><p class="muted">중복된 기록 ID는 덮어쓰지 않습니다. 옮긴 뒤에도 브라우저의 원본 기록은 삭제하지 않습니다.</p></section>
 <section class="panel"><h2>운송 기록 입력</h2>
 <form id="entryForm"><div class="grid">
 <div class="field"><label for="date">운송 날짜</label><input type="date" id="date" required></div>
@@ -22,52 +24,129 @@
 <div class="field"><label for="meal">식대 (원)</label><input type="number" id="meal" min="0" step="1" value="0" required></div>
 <div class="field"><label for="other">기타 비용 (원)</label><input type="number" id="other" min="0" step="1" value="0" required></div>
 <div class="field full"><label for="memo">메모 (선택)</label><input id="memo" maxlength="160" placeholder="예: 지게차 작업, 하차 대기 등"></div>
-</div><div class="actions"><button type="submit">기록 저장하기</button><button type="reset" class="secondary">입력칸 초기화</button></div></form></section>
-<section class="panel"><h2>전체 기록 합계</h2><div class="stats"><div class="stat"><span>총매출</span><strong id="totalFare">0원</strong></div><div class="stat"><span>총지출</span><strong id="totalCost">0원</strong></div><div class="stat net"><span>운행 수익 (매출 − 입력 지출)</span><strong id="totalNet">0원</strong></div></div><p class="muted">입력한 기록 전체의 합계입니다. 세금·보험료 등 미입력 비용은 포함되지 않습니다.</p></section>
-<section class="panel"><h2>운송 기록 목록</h2><div class="tablewrap"><table><thead><tr><th>날짜</th><th>운송 구간</th><th class="num">운임</th><th class="num">지출</th><th class="num">운행 수익</th><th>메모</th><th>관리</th></tr></thead><tbody id="entries"><tr><td colspan="7">아직 저장한 기록이 없습니다.</td></tr></tbody></table></div><div class="actions"><button type="button" id="exportCsv" class="secondary">CSV 파일로 백업</button><button type="button" id="clearAll" class="danger">전체 기록 삭제</button></div></section>
-<div class="foot"><p class="warning"><strong>중요:</strong> 기록은 현재 사용하는 브라우저 안에만 저장됩니다. 휴대폰과 컴퓨터 사이에 자동 공유되지 않으며, 브라우저 데이터 삭제나 기기 변경 시 사라질 수 있습니다. 정기적으로 CSV 백업을 받아 보관하세요. 공개된 GitHub 코드에는 실제 장부나 개인정보를 적지 마세요.</p><p class="muted">동국 트럭커 AI 1.0 · 첫 운송장부 버전</p></div>
+</div><div class="actions"><button id="saveBtn" type="submit" disabled>기록 저장하기</button><button type="reset" class="secondary">입력칸 초기화</button></div></form></section>
+<section class="panel"><h2>전체 기록 합계</h2><div class="stats"><div class="stat"><span>총매출</span><strong id="totalFare">0원</strong></div><div class="stat"><span>총지출</span><strong id="totalCost">0원</strong></div><div class="stat net"><span>운행 수익 (매출 − 입력 지출)</span><strong id="totalNet">0원</strong></div></div><p class="muted">로그인한 계정에 저장된 기록 전체의 합계입니다. 세금·보험료 등 미입력 비용은 포함되지 않습니다.</p></section>
+<section class="panel"><h2>운송 기록 목록</h2><div class="tablewrap"><table><thead><tr><th>날짜</th><th>운송 구간</th><th class="num">운임</th><th class="num">지출</th><th class="num">운행 수익</th><th>메모</th><th>관리</th></tr></thead><tbody id="entries"><tr><td colspan="7">로그인 후 기록이 표시됩니다.</td></tr></tbody></table></div><div class="actions"><button type="button" id="exportCsv" class="secondary" disabled>CSV 파일로 백업</button><button type="button" id="clearAll" class="danger" disabled>전체 기록 삭제</button></div></section>
+<div class="foot"><p class="warning"><strong>중요:</strong> 처음 사용하기 전에 Firebase 웹 설정값과 Firestore 보안 규칙을 확인하세요. 기록은 로그인한 계정의 클라우드에 저장됩니다. 네트워크 오류에 대비해 CSV 백업도 정기적으로 보관하세요. 공개된 GitHub 코드에 비밀번호나 서비스 계정 비밀키를 넣지 마세요.</p><p class="muted">동국 트럭커 AI 1.1 · Firebase 클라우드 연동 버전</p></div>
 </div>
-<script>
-(function(){
-'use strict';
-const KEY='dongguk-trucker-ledger-v1';
-const form=document.getElementById('entryForm');
-const tbody=document.getElementById('entries');
+<script type="module">
+import {initializeApp} from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js';
+import {getAuth,GoogleAuthProvider,signInWithPopup,signOut,onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js';
+import {getFirestore,collection,doc,setDoc,deleteDoc,getDoc,getDocs,onSnapshot,writeBatch} from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js';
+// Firebase 콘솔 > 프로젝트 설정 > 내 앱 > 웹 앱 SDK 설정에서 아래 값을 복사하세요.
+// 이 웹 앱 설정은 공개 클라이언트 설정이며, 데이터 보호는 Firestore 보안 규칙으로 합니다.
+const firebaseConfig = {
+  apiKey: 'AIzaSyB9o_edcZPgEdXG3aBZ0XOG5RnKjw9oYq8',
+  authDomain: 'dongguk-trucker-ai.firebaseapp.com',
+  projectId: 'dongguk-trucker-ai',
+  appId: '1:768804518685:web:b538c4c557db603184bff4',
+  messagingSenderId: '768804518685',
+  storageBucket: 'dongguk-trucker-ai.firebasestorage.app'
+};
+const LOCAL_KEY='dongguk-trucker-ledger-v1';
+const $=id=>document.getElementById(id);
 const won=n=>Number(n).toLocaleString('ko-KR')+'원';
-const safe=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const safe=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const cost=r=>r.fuel+r.toll+r.meal+r.other;
-let records=[];
-try{const saved=JSON.parse(localStorage.getItem(KEY)||'[]');records=Array.isArray(saved)?saved:[]}catch(e){alert('저장된 기록을 읽을 수 없습니다. 브라우저 저장 공간을 확인하세요.')}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(records));return true}catch(e){alert('기록 저장에 실패했습니다. 브라우저 저장 공간이나 시크릿 모드를 확인하세요.');return false}}
+let records=[],user=null,unsubscribe=null,db=null,auth=null,loaded=false,busy=false;
+function status(s){$('authStatus').textContent=s}
+function localRecords(){try{const a=JSON.parse(localStorage.getItem(LOCAL_KEY)||'[]');return Array.isArray(a)?a:[]}catch{return []}}
+function normalized(r){
+ if(!r||typeof r!=='object'||typeof r.id!=='string'||!r.id||r.id.includes('/'))return null;
+ const nums=['fare','fuel','toll','meal','other'];if(nums.some(k=>!Number.isSafeInteger(Number(r[k]))||Number(r[k])<0))return null;
+ if(!/^\d{4}-\d{2}-\d{2}$/.test(String(r.date||'')))return null;
+ return {id:r.id.slice(0,180),date:r.date,from:String(r.from||'').slice(0,80),to:String(r.to||'').slice(0,80),fare:Number(r.fare),fuel:Number(r.fuel),toll:Number(r.toll),meal:Number(r.meal),other:Number(r.other),memo:String(r.memo||'').slice(0,160)};
+}
 function render(){
  const sorted=[...records].sort((a,b)=>b.date.localeCompare(a.date));
- tbody.innerHTML=sorted.length?sorted.map(r=>`<tr><td>${safe(r.date)}</td><td>${safe(r.from)} → ${safe(r.to)}</td><td class="num">${won(r.fare)}</td><td class="num">${won(cost(r))}</td><td class="num ${r.fare-cost(r)<0?'negative':'positive'}">${won(r.fare-cost(r))}</td><td>${safe(r.memo||'')}</td><td><button class="small danger" data-delete="${safe(r.id)}" type="button">삭제</button></td></tr>`).join(''):'<tr><td colspan="7">아직 저장한 기록이 없습니다.</td></tr>';
+ $('entries').innerHTML=!user?'<tr><td colspan="7">로그인 후 기록이 표시됩니다.</td></tr>':!loaded?'<tr><td colspan="7">클라우드 기록을 불러오는 중입니다.</td></tr>':sorted.length?sorted.map(r=>`<tr><td>${safe(r.date)}</td><td>${safe(r.from)} → ${safe(r.to)}</td><td class="num">${won(r.fare)}</td><td class="num">${won(cost(r))}</td><td class="num ${r.fare-cost(r)<0?'negative':'positive'}">${won(r.fare-cost(r))}</td><td>${safe(r.memo)}</td><td><button class="small danger" data-delete="${safe(r.id)}" type="button">삭제</button></td></tr>`).join(''):'<tr><td colspan="7">아직 저장한 기록이 없습니다.</td></tr>';
  const fare=records.reduce((s,r)=>s+r.fare,0),expense=records.reduce((s,r)=>s+cost(r),0);
- document.getElementById('totalFare').textContent=won(fare);document.getElementById('totalCost').textContent=won(expense);document.getElementById('totalNet').textContent=won(fare-expense);
+ $('totalFare').textContent=won(fare);$('totalCost').textContent=won(expense);$('totalNet').textContent=won(fare-expense);
+ $('saveBtn').disabled=!user||!loaded||busy;$('exportCsv').disabled=!user||!loaded||!records.length;
+ $('clearAll').disabled=!user||!loaded||!records.length||busy;
+ const local=localRecords();$('migrationPanel').classList.toggle('hidden',!user||!loaded||!local.length);
+ $('migrationText').textContent=`이 브라우저에 기존 기록 ${local.length}건이 있습니다. 클라우드에 복사할 수 있습니다.`;
+ $('importBtn').disabled=!user||!loaded||busy;
 }
-function setToday(){document.getElementById('date').value=new Date().toLocaleDateString('en-CA')}
-setToday();render();
-form.addEventListener('submit',e=>{
- e.preventDefault();
- const get=id=>document.getElementById(id).value.trim();
- const num=id=>Number(get(id));
- const fields=['fare','fuel','toll','meal','other'];
- if(fields.some(id=>!Number.isSafeInteger(num(id))||num(id)<0)){alert('금액은 0 이상의 정수로 입력해 주세요.');return}
- const r={id:Date.now()+'-'+Math.random().toString(36).slice(2),date:get('date'),from:get('routeFrom'),to:get('routeTo'),fare:num('fare'),fuel:num('fuel'),toll:num('toll'),meal:num('meal'),other:num('other'),memo:get('memo')};
- records.push(r);if(!save()){records.pop();return}render();form.reset();setToday();alert('운송 기록이 저장되었습니다.');
-});
-tbody.addEventListener('click',e=>{const btn=e.target.closest('[data-delete]');if(!btn)return;const id=btn.dataset.delete;if(!confirm('이 기록을 삭제하시겠습니까?'))return;const before=records;records=records.filter(r=>r.id!==id);if(!save()){records=before;return}render()});
-document.getElementById('clearAll').addEventListener('click',()=>{if(!records.length)return;if(!confirm('모든 운송 기록을 삭제하시겠습니까? 복구할 수 없습니다. 먼저 CSV 백업을 권장합니다.'))return;const before=records;records=[];if(!save()){records=before;return}render()});
-document.getElementById('exportCsv').addEventListener('click',()=>{
- if(!records.length){alert('백업할 기록이 없습니다.');return}
+function setToday(){const d=new Date(),local=new Date(d.getTime()-d.getTimezoneOffset()*60000);$('date').value=local.toISOString().slice(0,10)}
+function exportRows(rows,prefix){
+ if(!rows.length){alert('백업할 기록이 없습니다.');return}
  const cols=['날짜','상차지','하차지','운임','주유비','톨비','식대','기타비용','총지출','운행수익','메모'];
  const escapeCsv=v=>'"'+String(v).replace(/"/g,'""')+'"';
  const safeCsv=v=>{const s=String(v);return /^[\s]*[=+\-@]/.test(s)?"'"+s:s};
- const rows=records.map(r=>[r.date,r.from,r.to,r.fare,r.fuel,r.toll,r.meal,r.other,cost(r),r.fare-cost(r),r.memo].map(v=>escapeCsv(safeCsv(v))).join(','));
- const blob=new Blob(['\uFEFF'+[cols.map(escapeCsv).join(','),...rows].join('\r\n')],{type:'text/csv;charset=utf-8'});
- const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='동국트럭커_운송장부_'+new Date().toLocaleDateString('en-CA')+'.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ const lines=rows.map(r=>[r.date,r.from,r.to,r.fare,r.fuel,r.toll,r.meal,r.other,cost(r),r.fare-cost(r),r.memo].map(v=>escapeCsv(safeCsv(v))).join(','));
+ const blob=new Blob(['\uFEFF'+[cols.map(escapeCsv).join(','),...lines].join('\r\n')],{type:'text/csv;charset=utf-8'});
+ const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=prefix+'_'+new Date().toISOString().slice(0,10)+'.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function entryCollection(){return collection(db,'users',user.uid,'entries')}
+function beginWatch(){
+ if(unsubscribe){unsubscribe();unsubscribe=null}
+ loaded=false;records=[];render();
+ unsubscribe=onSnapshot(entryCollection(),snap=>{
+  records=snap.docs.map(d=>normalized({...d.data(),id:d.id})).filter(Boolean);loaded=true;
+  status(`연결됨 · ${user.email||'구글 계정'} · 클라우드 기록 ${records.length}건`);render();
+ },err=>{loaded=false;status('클라우드 기록 읽기 실패: '+err.message);render()});
+}
+setToday();render();
+const configured=Object.values(firebaseConfig).every(v=>v&&!v.startsWith('여기에_'));
+if(!configured){status('Firebase 설정값이 아직 입력되지 않았습니다. GitHub에 배포하기 전에 설정을 완료하세요.');}
+else{
+ try{
+  const app=initializeApp(firebaseConfig);auth=getAuth(app);db=getFirestore(app);
+  $('loginBtn').disabled=false;status('구글 로그인 후 클라우드 장부를 사용할 수 있습니다.');
+  onAuthStateChanged(auth,u=>{
+   if(unsubscribe){unsubscribe();unsubscribe=null}
+   user=u;loaded=false;records=[];
+   $('loginBtn').classList.toggle('hidden',!!u);$('logoutBtn').classList.toggle('hidden',!u);
+   if(u){status('클라우드 연결 중…');beginWatch()}else{status('로그인하지 않았습니다.');render()}
+  });
+ }catch(err){status('Firebase 초기화 실패: '+err.message)}
+}
+$('loginBtn').addEventListener('click',async()=>{
+ if(!auth)return;
+ try{await signInWithPopup(auth,new GoogleAuthProvider())}catch(e){alert('로그인 실패: '+e.message+'\n팝업 차단 여부와 Firebase 승인 도메인을 확인하세요.')}
 });
-})();
+$('logoutBtn').addEventListener('click',async()=>{try{await signOut(auth)}catch(e){alert('로그아웃 실패: '+e.message)}});
+$('entryForm').addEventListener('submit',async e=>{
+ e.preventDefault();if(!user||!loaded||busy)return;
+ const get=id=>$(id).value.trim(),num=id=>Number(get(id));
+ if(['fare','fuel','toll','meal','other'].some(id=>!Number.isSafeInteger(num(id))||num(id)<0)){alert('금액은 0 이상의 정수로 입력해 주세요.');return}
+ const r={id:crypto.randomUUID(),date:get('date'),from:get('routeFrom'),to:get('routeTo'),fare:num('fare'),fuel:num('fuel'),toll:num('toll'),meal:num('meal'),other:num('other'),memo:get('memo')};
+ busy=true;render();try{await setDoc(doc(entryCollection(),r.id),r);$('entryForm').reset();setToday();alert('클라우드에 기록이 저장되었습니다.')}catch(err){alert('저장 실패: '+err.message)}finally{busy=false;render()}
+});
+$('entries').addEventListener('click',async e=>{
+ const btn=e.target.closest('[data-delete]');if(!btn||!user||!loaded||busy)return;
+ const id=btn.dataset.delete;if(!confirm('이 클라우드 기록을 삭제하시겠습니까?'))return;
+ busy=true;render();try{await deleteDoc(doc(entryCollection(),id))}catch(err){alert('삭제 실패: '+err.message)}finally{busy=false;render()}
+});
+$('clearAll').addEventListener('click',async()=>{
+ if(!user||!loaded||busy||!records.length)return;
+ if(!confirm(`클라우드 기록 ${records.length}건을 모두 삭제하시겠습니까? 복구할 수 없습니다. 먼저 CSV 백업을 권장합니다.`))return;
+ if(prompt('삭제를 확정하려면 "전체삭제"라고 입력하세요.')!=='전체삭제')return;
+ busy=true;render();try{
+  const ids=records.map(r=>r.id);
+  for(let i=0;i<ids.length;i+=400){const batch=writeBatch(db);ids.slice(i,i+400).forEach(id=>batch.delete(doc(entryCollection(),id)));await batch.commit()}
+  alert('클라우드 기록 삭제가 완료되었습니다.');
+ }catch(err){alert('일부 기록 삭제에 실패했을 수 있습니다. 현재 목록을 확인하세요: '+err.message)}finally{busy=false;render()}
+});
+$('exportCsv').addEventListener('click',()=>exportRows(records,'동국트럭커_클라우드장부'));
+$('localBackupBtn').addEventListener('click',()=>exportRows(localRecords().map(normalized).filter(Boolean),'동국트럭커_기존장부'));
+$('importBtn').addEventListener('click',async()=>{
+ if(!user||!loaded||busy)return;
+ const old=localRecords().map(normalized).filter(Boolean);
+ if(!old.length){alert('가져올 기존 기록이 없습니다.');return}
+ if(!confirm(`기존 장부 ${old.length}건을 현재 로그인 계정의 클라우드로 복사하시겠습니까? 기존 브라우저 기록은 그대로 보존됩니다.`))return;
+ busy=true;render();let copied=0,skipped=0;
+ try{
+  // Firestore batch는 최대 500개 쓰기이므로 200건씩 처리합니다.
+  for(let i=0;i<old.length;i+=200){
+   const chunk=old.slice(i,i+200),batch=writeBatch(db);let count=0;
+   for(const r of chunk){const ref=doc(entryCollection(),r.id),existing=await getDoc(ref);if(existing.exists()){skipped++;continue}batch.set(ref,r);count++}
+   if(count){await batch.commit();copied+=count}
+  }
+  alert(`클라우드 복사 완료: ${copied}건 추가, ${skipped}건 중복 제외. 기존 브라우저 기록은 유지됩니다.`);
+ }catch(err){alert(`복사 중 오류: ${err.message}\n현재까지 ${copied}건이 복사됐을 수 있습니다. 목록을 확인하세요.`)}finally{busy=false;render()}
+});
 </script>
 </body>
 </html>
